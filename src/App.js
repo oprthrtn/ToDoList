@@ -2,8 +2,9 @@ import React from 'react';
 import {Container, Navbar, Nav} from "react-bootstrap";
 import {Route, Routes } from "react-router";
 import {Link} from 'react-router-dom';
-import ToDoList from './pages/ToDoList';
-import News from './pages/News';
+import './css/index.css'
+import NewsContainer from './components/News/NewsContainer';
+import ToDoList from './components/ToDo/ToDoList';
 
 function auth() {
   let data = {"username" : "oper", "password": "oper"};
@@ -23,10 +24,11 @@ function auth() {
   )
 }
 
+
 function App() {
   auth();
   return (
-    <div className="App">
+    <div className="App d-flex flex-column flex-grow-1">
       
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
@@ -42,9 +44,14 @@ function App() {
       </Navbar>
 
       <Routes>
-        <Route exact path="/" element={<News/>}/>
+        <Route exact path="/" element={<NewsContainer/>}/>
         <Route path="/todos" element={<ToDoList/>}/>
       </Routes>
+
+
+      <footer className="d-flex justify-content-center align-items-center py-3" style={{backgroundColor: "gray"}}>
+        <div>Sticky footer example</div>
+      </footer>
     </div>
   );
 }
