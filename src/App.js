@@ -6,27 +6,7 @@ import './css/index.css'
 import NewsContainer from './components/News/NewsContainer';
 import ToDoList from './components/ToDo/ToDoList';
 
-function auth() {
-  let data = {"username" : "oper", "password": "oper"};
-  fetch('https://sas.front.kreosoft.space/api/auth', {
-      credentials: 'same-origin',  
-      method: 'POST',              
-      body: JSON.stringify(data),  
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-  })
-  .then(res => res.json())
-  .then(
-    (result) => {
-      localStorage.setItem('token', result.accessToken);
-    }
-  )
-}
-
-
 function App() {
-  auth();
   return (
     <div className="App d-flex flex-column flex-grow-1">
       

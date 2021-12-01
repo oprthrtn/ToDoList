@@ -3,8 +3,24 @@ import { faCheck, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { ButtonGroup, Card } from "react-bootstrap";
+import {useDispatch} from 'react-redux';
+import { deleteListElemThunkCreator, checkListElemThunkCreator, updateToDoElemActionCreator } from "../../reducers/todo-reducer";
 
 function ListElem(props){
+    const dispatch = useDispatch();
+
+    function deleteListElem(){
+        dispatch(deleteListElemThunkCreator(props.ownerId, props.id));
+    }
+
+    function checkListElem(){
+        dispatch(checkListElemThunkCreator(props.ownerId, props.id));
+    }
+
+    function updateListElem(){
+        dispatch(updateToDoElemActionCreator(props.id, props.name, props.description, props.priority, props.listId));
+    }
+
     if(props.isDone){
         return(
           <Card style={{borderRadius: "0px"}}>
@@ -15,7 +31,7 @@ function ListElem(props){
                           <div>{props.createDateTime}</div>
                       </div>
 
-                      <div className="mt-4"></div>
+                      <div className="mt-4">{props.description}</div>
                   </div>
                   <ButtonGroup className="align-items-center">
                     <FontAwesomeIcon style={{color: "green", fontSize: "50px"}} icon={faCheck}></FontAwesomeIcon>
@@ -48,9 +64,9 @@ function ListElem(props){
                       <div className="mt-4">{props.description}</div>
                   </div>
                   <ButtonGroup className="align-items-center">
-                      <FontAwesomeIcon className="btn btn-success bg-light" type="button" style={{color: "green", fontSize: "35px", width: "100%"}} icon={faCheck}  />
-                      <FontAwesomeIcon className="btn btn-warning bg-light" type="button" /*onClick={() => checkElem(elem.id, ownerID)}*/  style={{color: "#ffc107", fontSize: "35px", width: "100%"}}icon={faPen} />
-                      <FontAwesomeIcon className="btn btn-danger bg-light" type="button" style={{color: "#ff0000", fontSize: "35px", width: "100%"}} icon={faTrashAlt} />
+                      <FontAwesomeIcon className="btn btn-success bg-light" type="button" onClick={() => checkListElem()} style={{color: "green", fontSize: "35px", width: "100%"}} icon={faCheck}  />
+                      <FontAwesomeIcon className="btn btn-warning bg-light" type="button" onClick={() => updateListElem()}  style={{color: "#ffc107", fontSize: "35px", width: "100%"}}icon={faPen} />
+                      <FontAwesomeIcon className="btn btn-danger bg-light" type="button" onClick={() => deleteListElem()} style={{color: "#ff0000", fontSize: "35px", width: "100%"}} icon={faTrashAlt} />
                   </ButtonGroup>
               </Card.Body>
           </Card>)   

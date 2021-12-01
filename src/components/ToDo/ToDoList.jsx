@@ -1,5 +1,5 @@
 import {Container} from "react-bootstrap";
-import CreateListElemForm from "./CreateListElemForm";
+import CreateListFormContainer from "./CreateListElemFormContainer";
 import CreateListForm from "./CreateListForm";
 import LegendToDo from "./LegendToDo";
 import TabListsContainer from "./TabListsContainer";
@@ -12,7 +12,7 @@ const ToDoList = function(){
         <Container className="my-4 flex-grow-1">
             <LegendToDo/>
             <CreateListForm/>
-            <CreateListElemForm/>
+            <CreateListFormContainer/>
             <TabListsContainer/>
         </Container>
     )

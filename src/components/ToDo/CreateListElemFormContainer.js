@@ -1,14 +1,14 @@
 import { connect } from "react-redux";
 import React from 'react';
 import {loadToDoThunkCreator} from "../../reducers/todo-reducer";
-import TabLists from "./TabLists";
+import CreateListElemForm from "./CreateListElemForm";
 
 class MiddleToDoListComponent extends React.Component {
     componentDidMount() {
         this.props.loadToDoThunkCreator();
     }
     render(){
-        return(<TabLists {...this.props}/>)
+        return(<CreateListElemForm {...this.props}/>)
     }
 }
 
@@ -16,6 +16,5 @@ function mapStateToProps(state){
     return {todoPage : state.todoPage}
 }
 
-const TabListsContainer = connect(mapStateToProps, {loadToDoThunkCreator }) (MiddleToDoListComponent)
-
-export default TabListsContainer;
+const CreateListFormContainer = connect(mapStateToProps, {loadToDoThunkCreator }) (MiddleToDoListComponent)
+export default CreateListFormContainer;

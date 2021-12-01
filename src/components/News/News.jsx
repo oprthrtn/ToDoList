@@ -7,7 +7,6 @@ import NewsElem from "./NewsElem";
 
 class News extends React.Component{
   render() {
-    console.log(this.props);
     return (
       <Container className="my-4 flex-grow-1">
         <NewsCarousel/>
