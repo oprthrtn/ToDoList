@@ -57,7 +57,6 @@ function deleteList(id){
 }
 
 function setListElem(name, description, priority, listId, id){
-    console.log(id)
     return instance.post('ToDoItem', {"id" : id, "name" : name, "description" : description, "priority" : priority, "listId" : listId}, 
         {headers: { 'Authorization' : `Bearer ${localStorage.getItem('token')}` }})
     .then(response => {

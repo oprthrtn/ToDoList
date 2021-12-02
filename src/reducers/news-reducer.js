@@ -21,7 +21,7 @@ export function loadNewsActionCreator(news){
 }
 
 
-function getFormattedDate(datetime) {
+export function getFormattedDate(datetime) {
     var date = new Date(datetime);
     let year = date.getFullYear();
     let month = (1 + date.getMonth()).toString().padStart(2, '0');

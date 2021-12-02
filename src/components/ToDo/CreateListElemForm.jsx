@@ -38,6 +38,7 @@ function CreateListElemForm(props){
         let desc = descRef.current.value;
 
         dispatch(setListElemThunkCreator(state.id, name, desc, priority, listId));
+        clearElem();
         event.preventDefault();
         event.stopPropagation();
     }

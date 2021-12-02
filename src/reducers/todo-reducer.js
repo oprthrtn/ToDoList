@@ -1,4 +1,5 @@
 import { ToDoApi } from "../API/ToDoApi";
+import { getFormattedDate } from "./news-reducer";
 
 const LOAD_LISTS = "LOAD_LISTS";
 const ADD_ELEM = "ADD_ELEM";
@@ -64,11 +65,20 @@ export function loadToDoThunkCreator(){
         ToDoApi.getToDoLists().then(data => {
 
             if(data === undefined){
-                ToDoApi.auth().then(response => {
+                ToDoApi.auth().then(() => {
                     dispatch(loadToDoThunkCreator());
                 })
             }
             else{
+                data.map((value) => {
+                    value.items.map((item) =>{
+                        item.createDateTime = getFormattedDate(item.createDateTime);
+                        return item;
+                    });
+
+                    return value;
+                });
+
                 dispatch(loadToDoActionCreator(data));
             }
         })
@@ -81,7 +91,7 @@ export function loadToDoThunkCreator(){
 export function setListThunkCreator(name){
     return(dispatch) => {
         ToDoApi.setList(name)
-        .then(res =>{
+        .then(() =>{
             dispatch(loadToDoThunkCreator());
         })
     }
@@ -90,7 +100,7 @@ export function setListThunkCreator(name){
 export function deleteListThunkCreator(id){
     return(dispatch) => {
         ToDoApi.deleteList(id)
-        .then(res =>{
+        .then(() =>{
             dispatch(loadToDoThunkCreator());
         })
     }
@@ -99,7 +109,7 @@ export function deleteListThunkCreator(id){
 export function setListElemThunkCreator(id, name, desc, priority, listId){
     return(dispatch) => {
         ToDoApi.setListElem(name, desc, parseInt(priority), parseInt(listId), parseInt(id))
-        .then(res =>{
+        .then(() =>{
             dispatch(loadToDoThunkCreator());
         })
     }
@@ -108,7 +118,7 @@ export function setListElemThunkCreator(id, name, desc, priority, listId){
 export function deleteListElemThunkCreator(ownerId, id){
     return(dispatch) => {
         ToDoApi.deleteListElem(ownerId, id)
-        .then(res =>{
+        .then(() =>{
             dispatch(loadToDoThunkCreator());
         })
     }
@@ -117,7 +127,7 @@ export function deleteListElemThunkCreator(ownerId, id){
 export function checkListElemThunkCreator(ownerId, id){
     return(dispatch) => {
         ToDoApi.checkListElem(ownerId, id)
-        .then(res =>{
+        .then(() =>{
             dispatch(loadToDoThunkCreator());
         })
     }
