@@ -36,11 +36,11 @@ function setList(name){
             {headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }})
     .then(response => {
         if(response.status === 200){
-            return response.data;
+            return response;
         }
     })
     .catch(error =>{
-        console.log(error)
+        return error;
     });
 }
 
@@ -48,11 +48,11 @@ function deleteList(id){
     return instance.delete('ToDoList',{data : {"id" : id}, headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }})
     .then(response => {
         if(response.status === 200){
-            return response.data;
+            return response;
         }
     })
     .catch(error =>{
-        console.log(error)
+        return error;
     });
 }
 
@@ -61,11 +61,11 @@ function setListElem(name, description, priority, listId, id){
         {headers: { 'Authorization' : `Bearer ${localStorage.getItem('token')}` }})
     .then(response => {
         if(response.status === 200){
-            return response.data;
+            return response;
         }
     })
     .catch(error =>{
-        console.log(error);
+       return error;
     });
 }
 
@@ -73,11 +73,11 @@ function deleteListElem(ownerId, id){
     return instance.delete('ToDoItem',{data : {"ownerId" : ownerId, "id" : id}, headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }})
     .then(response => {
         if(response.status === 200){
-            return response.data;
+            return response;
         }
     })
     .catch(error =>{
-        console.log(error)
+        return error;
     });
 }
 
@@ -86,11 +86,11 @@ function checkListElem(ownerId, id){
             {headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }})
     .then(response => {
         if(response.status === 200){
-            return response.data;
+            return response;
         }
     })
     .catch(error =>{
-        console.log(error)
+        return error;
     });
 }
 

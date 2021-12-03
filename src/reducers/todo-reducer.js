@@ -91,8 +91,16 @@ export function loadToDoThunkCreator(){
 export function setListThunkCreator(name){
     return(dispatch) => {
         ToDoApi.setList(name)
-        .then(() =>{
-            dispatch(loadToDoThunkCreator());
+        .then((response) =>{
+
+            if(response.status === 200){
+                dispatch(loadToDoThunkCreator());
+            }
+            else{
+                ToDoApi.auth().then(() =>{
+                    dispatch(setListThunkCreator(name));
+                })
+            }
         })
     }
 }
@@ -100,8 +108,16 @@ export function setListThunkCreator(name){
 export function deleteListThunkCreator(id){
     return(dispatch) => {
         ToDoApi.deleteList(id)
-        .then(() =>{
-            dispatch(loadToDoThunkCreator());
+        .then((response) =>{
+
+            if(response.status === 200){
+                dispatch(loadToDoThunkCreator());
+            }
+            else{
+                ToDoApi.auth().then(() =>{
+                    dispatch(deleteListThunkCreator(id));
+                })
+            }
         })
     }
 }
@@ -109,8 +125,16 @@ export function deleteListThunkCreator(id){
 export function setListElemThunkCreator(id, name, desc, priority, listId){
     return(dispatch) => {
         ToDoApi.setListElem(name, desc, parseInt(priority), parseInt(listId), parseInt(id))
-        .then(() =>{
-            dispatch(loadToDoThunkCreator());
+        .then((response) =>{
+            if(response.status === 200){
+                dispatch(loadToDoThunkCreator());
+            }
+            else{
+                ToDoApi.auth().then(() =>{
+                    dispatch(setListElemThunkCreator(id, name, desc, priority, listId));
+                })
+            }
+
         })
     }
 }
@@ -118,8 +142,16 @@ export function setListElemThunkCreator(id, name, desc, priority, listId){
 export function deleteListElemThunkCreator(ownerId, id){
     return(dispatch) => {
         ToDoApi.deleteListElem(ownerId, id)
-        .then(() =>{
-            dispatch(loadToDoThunkCreator());
+        .then((response) =>{
+
+            if(response.status === 200){
+                dispatch(loadToDoThunkCreator());
+            }
+            else{
+                ToDoApi.auth().then(() =>{
+                    dispatch(deleteListElemThunkCreator(ownerId, id));
+                })
+            }
         })
     }
 }
@@ -127,8 +159,16 @@ export function deleteListElemThunkCreator(ownerId, id){
 export function checkListElemThunkCreator(ownerId, id){
     return(dispatch) => {
         ToDoApi.checkListElem(ownerId, id)
-        .then(() =>{
-            dispatch(loadToDoThunkCreator());
+        .then((response) =>{
+
+            if(response.status === 200){
+                dispatch(loadToDoThunkCreator());
+            }
+            else{
+                ToDoApi.auth().then(() =>{
+                    dispatch(checkListElemThunkCreator(ownerId, id));
+                })
+            }
         })
     }
 }

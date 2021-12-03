@@ -47,7 +47,7 @@ export function loadNewsThunkCreator(){
 export function postLikeThunkCreator(id){
     return(dispatch) => {
         newsApi.postLike(id)
-        .then(res =>{
+        .then(() =>{
             dispatch(loadNewsThunkCreator());
         })
     }
